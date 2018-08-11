@@ -2,8 +2,11 @@ class User < ApplicationRecord
   include Authenticable
   before_create :set_hashed_id
 
-  validates :first_name, :last_name, :email, presence: true
-  validates :email, :hashed_id, uniqueness: true
+  validates :first_name, :last_name, presence: true, unless: :is_registering
+  validates :email, presence: true, uniqueness: true
+  validates :hashed_id, uniqueness: true
+
+  attr_accessor :is_registering
 
   def self.search(term, page = nil)
     users = User.all
