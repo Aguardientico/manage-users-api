@@ -5,9 +5,8 @@ class SessionController < ApplicationController
   def create
     user = User.login(email: params[:email], password: params[:password])
     if user
-      render json: {
-        message: "success", token: user.jwt_token
-      }, status: :ok
+      response.headers['Token'] = user.jwt_token
+      render json: user, status: :ok
     else
       render json: {
         message: "unauthorized"

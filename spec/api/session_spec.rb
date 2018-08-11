@@ -13,11 +13,8 @@ RSpec.describe 'Sessions API' do
       it do
         body = nil
         expect { body = JSON.parse(response.body).with_indifferent_access }.not_to raise_error
-        expect(body.keys).to match_array(%w[message token])
-        expect(body).to match(
-          message: 'success',
-          token: user.jwt_token
-        )
+        expect(body).to eq(user.as_json)
+        expect(response.headers['Token']).to eq(user.jwt_token)
       end
     end
   end
