@@ -9,7 +9,7 @@ class SessionController < ApplicationController
       render json: user, status: :ok
     else
       render json: {
-        message: "unauthorized"
+        errors: "unauthorized"
       }, status: :unauthorized
     end
   end
