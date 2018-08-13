@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    head :no_content
+    render json: { id: params[:id] }, status: :ok
   end
 
   private
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   def load_user
     @user = User.find_by!(hashed_id: params[:id])
   rescue ActiveRecord::RecordNotFound
-    head :not_found
+    render json: { errors: 'Not found' }, status: :not_found
   end
 
   def user_params

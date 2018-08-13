@@ -14,7 +14,7 @@ class User < ApplicationRecord
       term = "%#{term}%"
       users = User.where("first_name ILIKE :term OR last_name ILIKE :term OR job_title ILIKE :term", term: term)
     end
-    users.page(page)
+    users.order(:id).page(page)
   end
 
   def as_json(options = {})

@@ -60,9 +60,9 @@ RSpec.describe User do
   end
 
   it 'returns 30 records (page size)' do
-    create_list(:user, 50)
+    create_list(:user, 15)
     users = User.search('John')
-    expect(users.size).to be(30)
+    expect(users.size).to be(10)
     expect(users.total_pages).to be(2)
   end
 end
